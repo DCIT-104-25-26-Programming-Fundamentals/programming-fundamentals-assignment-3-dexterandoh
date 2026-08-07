@@ -2,33 +2,35 @@
 // PROGRAMMING FUNDAMENTALS — Assignment 1
 // =============================================================================
 //
-// TASK: Prime Number Ch
+// TASK: Prime Number Checker
+// =============================================================================
 
 const readlineSync = require('readline-sync');
 
-// Function to check if a number is prime
 function isPrime(n) {
+    // Numbers less than 2 are not prime
     if (n < 2) {
-        return false; // Numbers less than 2 are NOT prime
+        return false;
     }
-    // Check divisibility up to square root of n
-    for (let i = 2; i <= Math.sqrt(n); i++) {
-        if (n % i === 0) {
-            return false; // Found a divisor, not prime
+
+    // Only need to check divisors up to the square root of n
+    for (let divisor = 2; divisor <= Math.sqrt(n); divisor++) {
+        if (n % divisor === 0) {
+            return false;
         }
     }
-    return true; // No divisors found, prime
+
+    return true;
 }
 
-// Main function
 function main() {
-    const num = readlineSync.questionInt("Enter a number: ");
-    if (isPrime(num)) {
-        console.log(`${num} is a prime number.`);
+    const number = readlineSync.questionInt("Enter a number: ");
+
+    if (isPrime(number)) {
+        console.log(`${number} is a prime number.`);
     } else {
-        console.log(`${num} is NOT a prime number.`);
+        console.log(`${number} is NOT a prime number.`);
     }
 }
 
-// Run the program
 main();
