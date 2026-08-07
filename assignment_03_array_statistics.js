@@ -44,3 +44,72 @@
 // =============================================================================
 
 
+// =============================================================================
+// PROGRAMMING FUNDAMENTALS — Assignment 3
+// =============================================================================
+//
+// TASK: Array Statistics Calculator
+// =============================================================================
+
+const readlineSync = require('readline-sync');
+
+function calculateSum(numbers) {
+    let total = 0;
+    for (let i = 0; i < numbers.length; i++) {
+        total += numbers[i];
+    }
+    return total;
+}
+
+function calculateAverage(numbers) {
+    const total = calculateSum(numbers);
+    return total / numbers.length;
+}
+
+function findMaximum(numbers) {
+    let largest = numbers[0];
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] > largest) {
+            largest = numbers[i];
+        }
+    }
+    return largest;
+}
+
+function findMinimum(numbers) {
+    let smallest = numbers[0];
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] < smallest) {
+            smallest = numbers[i];
+        }
+    }
+    return smallest;
+}
+
+function main() {
+    const n = readlineSync.questionInt("How many numbers? ");
+
+    if (n <= 0) {
+        console.log("Error: The number of values must be a positive integer.");
+        return;
+    }
+
+    const numbers = [];
+    for (let i = 0; i < n; i++) {
+        const value = readlineSync.questionFloat(`Enter number ${i + 1}: `);
+        numbers.push(value);
+    }
+
+    const total = calculateSum(numbers);
+    const average = calculateAverage(numbers);
+    const maximum = findMaximum(numbers);
+    const minimum = findMinimum(numbers);
+
+    console.log("\nResults:");
+    console.log(`Sum:     ${total}`);
+    console.log(`Average: ${average}`);
+    console.log(`Maximum: ${maximum}`);
+    console.log(`Minimum: ${minimum}`);
+}
+
+main();
