@@ -75,3 +75,98 @@
 // =============================================================================
 
 
+// =============================================================================
+// PROGRAMMING FUNDAMENTALS — Assignment 9
+// =============================================================================
+//
+// TASK: Console-Based Simple Calculator
+// =============================================================================
+
+const readlineSync = require('readline-sync');
+
+function add(a, b) {
+    return a + b;
+}
+
+function subtract(a, b) {
+    return a - b;
+}
+
+function multiply(a, b) {
+    return a * b;
+}
+
+function divide(a, b) {
+    if (b === 0) {
+        throw new Error("Cannot divide by zero.");
+    }
+    return a / b;
+}
+
+function modulus(a, b) {
+    if (b === 0) {
+        throw new Error("Cannot divide by zero.");
+    }
+    return a % b;
+}
+
+function exponentiate(a, b) {
+    return a ** b;
+}
+
+function getTwoNumbers() {
+    const first = readlineSync.questionFloat("Enter first number : ");
+    const second = readlineSync.questionFloat("Enter second number: ");
+    return [first, second];
+}
+
+function printMenu() {
+    console.log("\n============================");
+    console.log("     SIMPLE CALCULATOR");
+    console.log("============================");
+    console.log("1. Addition");
+    console.log("2. Subtraction");
+    console.log("3. Multiplication");
+    console.log("4. Division");
+    console.log("5. Modulus");
+    console.log("6. Exponentiation");
+    console.log("7. Quit");
+}
+
+function main() {
+    const operations = {
+        "1": { symbol: "+", func: add },
+        "2": { symbol: "-", func: subtract },
+        "3": { symbol: "*", func: multiply },
+        "4": { symbol: "/", func: divide },
+        "5": { symbol: "%", func: modulus },
+        "6": { symbol: "**", func: exponentiate },
+    };
+
+    while (true) {
+        printMenu();
+        const choice = readlineSync.question("Select an operation (1-7): ").trim();
+
+        if (choice === "7") {
+            console.log("Goodbye!");
+            break;
+        }
+
+        if (!operations[choice]) {
+            console.log("Error: Invalid choice. Please enter a number between 1 and 7.");
+            continue;
+        }
+
+        const { symbol, func } = operations[choice];
+        const [a, b] = getTwoNumbers();
+
+        try {
+            const result = func(a, b);
+            console.log(`Result: ${a} ${symbol} ${b} = ${result.toFixed(2)}`);
+        } catch (error) {
+            console.log(`Error: ${error.message}`);
+        }
+    }
+}
+
+main();
